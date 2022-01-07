@@ -34,8 +34,8 @@ def listen():
         print(command)
 
         command = command.lower()
-        if "cortana" in command:
-            command = command.replace('cortana', '')
+        if "Isis" in command:
+            command = command.replace('Isis', '')
 
         return command
     except:
@@ -55,7 +55,8 @@ def run():
             'google': 'google.com',
             'youtube': 'youtube.com',
             'instagram': 'instagram.com',
-            'twitter': 'twitter.com'
+            'twitter': 'twitter.com',
+            'facebook': 'facebook.com'
             }
         for x in list(sites.keys()):
             if x in command:
