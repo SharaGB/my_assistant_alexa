@@ -12,13 +12,13 @@ voice = pyttsx3.init() # Inicializar
 
 # Obetener la lista de voces y establecerla
 get_voices = voice.getProperty('voices') # Obtener lista de todas las voces disponibles
-voice.setProperty('voice', get_voices[2].id) # Configurar una propieda dentro de voice
+voice.setProperty('voice', get_voices[1].id) # Configurar una propieda dentro de voice
 
 # Configuración de voz
 voice.setProperty('rate', 130)
 voice.setProperty('volume', 1.5)
 
-voice.say('¿Ahora qué quiere?')
+voice.say('Welcome!')
 voice.runAndWait()
 
 def talk(text):
@@ -39,18 +39,18 @@ def listen():
 
         return command
     except:
-        talk("Por favor vuelve a intentar")
+        talk("Please try again")
         return ("Falló")
 
 def run():
     command = listen()
 
-    if 'reproduce' in command or 'reproducir' in command:
-        music = command.replace('reproduce', '')
-        talk('Reproduciendo ' + music)
+    if 'plays' in command:
+        music = command.replace('plays', '')
+        talk('Playing ' + music)
         pywhatkit.playonyt(music)
 
-    elif 'abre' in command or 'abrir' in command:
+    elif 'open' in command or 'opens' in command:
         sites = {
             'google': 'google.com',
             'youtube': 'youtube.com',
@@ -60,22 +60,22 @@ def run():
         for x in list(sites.keys()):
             if x in command:
                 sub.call(f'start chrome.exe {sites[x]}', shell=True)
-                talk('Abriendo' + x)
+                talk('Opening' + x)
 
-    elif 'hora' in command or 'horas' in command:
+    elif 'time' in command or 'hour' in command:
         time = datetime.now().strftime('%I:%M %p')
-        talk('Son las ' + time)
+        talk('It is ' + time)
 
-    elif "busca" in command or "buscar" in command:
-        search = command.replace('busca', '')
+    elif "search" in command:
+        search = command.replace('search', '')
         if len(search) <= 5:
-            print("No se encontró nada")
+            print("I don't know found anything")
         else:
             wiki = wikipedia.summary(search, 1)
             talk(wiki)
 
-    if 'adiós' in command or 'adios' in command or 'salir' in command:
-        talk('Hasta pronto')
+    if 'bye' in command or 'adios' in command or 'adiós' in command:
+        talk('See you soon')
         os._exit(1)
 
 while True:
